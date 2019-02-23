@@ -8,20 +8,20 @@ This repository contains a collection of scripts I've developed/collected to bac
 ### Generate GPG Keys
 You need to generate a gpg key pair to encrypt and sign your backups. Generate a RSA key that never expires and give it a good name like "Duplicity Backup".
 
-`code`
+`
 gpg --full-gen-key
-`code`
+`
 
 ### Import GPG Secret Keys for Root
 We need to export the secret key from your user so we can use it in the cron jobs.
 
-`code`
+`
 gpg --export-secret-keys [key id] > dup_secret_key.asc
 sudo -i 
 gpg ---pinentry-mode loopback --import /path/to/dup_secret_key.asc  
 gpg --edit-key [key id] trust quit
 pick option 5
-`code`
+`
 
 ### Create an AWS S3 Bucket
 Create a new AWS identity and give it S3 permissions. Generate the necessary ACCESS KEY ID and SECRET ACCESS KEY. Record these, because you will need them for the scripts.
@@ -29,18 +29,18 @@ Create a new AWS identity and give it S3 permissions. Generate the necessary ACC
 ### Create .passphrase File 
 Create a .passphrase file in the root of your home directory and root's home folder (normally /root). Substitute your gpg passphrase and the aws access key id and secret key.
 
-`code`
+`
 PASSPHRASE=[gpg passphrase]
 AWS_ACCESS_KEY_ID=[AWS access key id]
 AWS_SECRET_ACCESS_KEY=[AWS access key]
-`code`
+`
 
 Change the access on the file so only the owner can read/write/execute it.
 
-`code`
+`
 chmod 700 ~/.passphrase
 chmod 700 /root/.passphrase
-`code`
+`
 
 ### Copy cron jobs
 Copy the duplicity-inc file to /etc/cron.daily. Edit the file to include your encryption and signature key ids and your bucket name. Also update include and excludes as appropriate.
@@ -49,10 +49,10 @@ Copy the duplicity-full file to the /etc/cron.monthly. Edit the file like you di
 
 Make both file executable by root.
 
-`code`
+`
 chmod 750 /etc/cron.daily/duplicity-inc
 chmod 750 /etc/cron.monthly/duplicity-full
-`code`
+`
 
 ### Copy other script files.
 Copy the other script files to a place of your chosing. Edit them as necessary and make them executable. You can place them in your PATH if you wish.
