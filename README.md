@@ -55,4 +55,4 @@ chmod 750 /etc/cron.monthly/duplicity-full
 ```
 
 ### Copy other script files.
-Copy the other script files to a place of your chosing. Edit them as necessary and make them executable. You can place them in your PATH if you wish.
+Copy the other script files to a place of your choosing. Edit them as necessary and make them executable. You can place them in your PATH if you wish.
