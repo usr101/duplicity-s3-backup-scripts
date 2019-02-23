@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# View the cron logs for output from the duplicity cron jobs.
+journalctl -xb -u cronie

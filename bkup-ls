@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# List the current files in the duplicity backup on S3.
+
+test -x $(which duplicity) || exit 0
+. ~/.passphrase
+
+export PASSPHRASE
+export AWS_SECRET_ACCESS_KEY
+export AWS_ACCESS_KEY_ID 
+
+$(which duplicity) list-current-files --encrypt-key [gpg encryption key] --sign-key [gpg signature key] s3+http://[bucketname]
+
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export PASSPHRASE=
+
