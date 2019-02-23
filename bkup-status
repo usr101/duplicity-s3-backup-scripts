@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Gets the duplicity backup collection status from S3.
+
+test -x $(which duplicity) || exit 0
+. ~/.passphrase
+
+export PASSPHRASE
+export AWS_SECRET_ACCESS_KEY
+export AWS_ACCESS_KEY_ID 
+
+$(which duplicity) collection-status --encrypt-key [gpg encryption key] --sign-key [gpg signature key] s3+http://[bucketname]
+
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export PASSPHRASE=
+
