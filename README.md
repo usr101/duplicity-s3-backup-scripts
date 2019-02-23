@@ -27,27 +27,19 @@ pick option 5
 Create a new AWS identity and give it S3 permissions. Generate the necessary ACCESS KEY ID and SECRET ACCESS KEY. Record these, because you will need them for the scripts.
 
 ### Create .passphrase File 
-Create a .passphrase file in the root of your home directory and root's home folder (normally /root). Substitute your gpg passphrase and the aws access key id and secret key.
-
-```
-PASSPHRASE=[gpg passphrase]
-AWS_ACCESS_KEY_ID=[AWS access key id]
-AWS_SECRET_ACCESS_KEY=[AWS access key]
-```
+Create a .backup-to-s3-config file in the root of your home directory and root's home folder (normally /root). Substitute your gpg passphrase, gpg key id, aws access key id, secret key, and bucket name.
 
 Change the access on the file so only the owner can read/write/execute it.
 
 ```
-chmod 700 ~/.passphrase
-chmod 700 /root/.passphrase
+chmod 700 ~/.backup-to-s3-config
+chmod 700 /root/.backup-to-s3-config
 ```
 
 ### Copy cron jobs
-Copy the duplicity-inc file to /etc/cron.daily. Edit the file to include your encryption and signature key ids and your bucket name. Also update include and excludes as appropriate.
+Copy the backup-to-s3 file to /etc/cron.daily. Edit the file to include your encryption and signature key ids and your bucket name. Also update include and excludes as appropriate.
 
-Copy the duplicity-full file to the /etc/cron.monthly. Edit the file like you did for the duplicity-inc file.
-
-Make both file executable by root.
+Make the file executable by root.
 
 ```
 chmod 750 /etc/cron.daily/duplicity-inc

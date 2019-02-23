@@ -1,4 +1,0 @@
-# Rename to .passphase in home folder and chmod 700
-PASSPHRASE=[gpg passphrase]
-AWS_ACCESS_KEY_ID=[AWS access key id]
-AWS_SECRET_ACCESS_KEY=[AWS access key]
