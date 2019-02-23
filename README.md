@@ -42,8 +42,7 @@ Copy the backup-to-s3 file to /etc/cron.daily. Edit the file to include your enc
 Make the file executable by root.
 
 ```
-chmod 750 /etc/cron.daily/duplicity-inc
-chmod 750 /etc/cron.monthly/duplicity-full
+chmod 750 /etc/cron.daily/backup-to-s3
 ```
 
 ### Copy other script files.
