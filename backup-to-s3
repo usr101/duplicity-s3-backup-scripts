@@ -7,8 +7,8 @@ export PASSPHRASE
 export AWS_SECRET_ACCESS_KEY
 export AWS_ACCESS_KEY_ID 
 
-$(which duplicity) --full-if-older-than 3M --encrypt-key $ENCRYPTION_KEY --sign-key $SIGNATURE_KEY --volsize=250 --include=/home/mike/Documents --include=/home/mike/Projects --include=/home/mike/Videos --include=/home/mike/Pictures --exclude=/** / $BUCKET_NAME
-$(which duplicity) remove-all-but-n-full 3 --force $BUCKET_NAME
+$(which duplicity) --full-if-older-than $FULL_BACKUP --encrypt-key $ENCRYPTION_KEY --sign-key $SIGNATURE_KEY --volsize=250 $BACKUP_INCLUDES --exclude=/** / $BUCKET_NAME
+$(which duplicity) remove-all-but-n-full $NUM_FULL_TO_KEEP --force $BUCKET_NAME
 
 export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=
