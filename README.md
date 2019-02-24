@@ -18,15 +18,17 @@ We need to export the secret key from your user so we can use it in the cron job
 ```
 gpg --export-secret-keys [key id] > dup_secret_key.asc
 sudo -i 
-gpg ---pinentry-mode loopback --import /path/to/dup_secret_key.asc  
-gpg --edit-key [key id] trust quit
+gpg --pinentry-mode loopback --import /path/to/dup_secret_key.asc  
+gpg --edit-key [key id] 
+enter trust
 pick option 5
+enter quit
 ```
 
 ### Create an AWS S3 Bucket
 Create a new AWS identity and give it S3 permissions. Generate the necessary ACCESS KEY ID and SECRET ACCESS KEY. Record these, because you will need them for the scripts.
 
-### Create .passphrase File 
+### Create .backup-to-s3-config File 
 Create a .backup-to-s3-config file in the root of your home directory and root's home folder (normally /root). Substitute your gpg passphrase, gpg key id, aws access key id, secret key, and bucket name.
 
 Change the access on the file so only the owner can read/write/execute it.
@@ -37,13 +39,9 @@ chmod 700 /root/.backup-to-s3-config
 ```
 
 ### Copy cron jobs
-Copy the backup-to-s3 file to /etc/cron.daily. Edit the file to include your encryption and signature key ids and your bucket name. Also update include and excludes as appropriate.
+Copy the backup-to-s3 file to /etc/cron.daily. Update include and excludes as appropriate.
 
-Make the file executable by root.
-
-```
-chmod 750 /etc/cron.daily/backup-to-s3
-```
+Make sure the file is executable by root.
 
 ### Copy other script files.
 Copy the other script files to a place of your choosing. Edit them as necessary and make them executable. You can place them in your PATH if you wish.
